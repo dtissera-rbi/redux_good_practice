@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom"
+
 function Layout(props) {
-    const navigate = () => {}
+    const navigate = useNavigate()
     const menu = [
         'home',
         'navigation',
-        'products'
+        'products',
+        'login'
     ]
     
     const handleClickMenuItem = (menuItemName) => {
@@ -12,17 +15,21 @@ function Layout(props) {
     
     return (
         <div>
-            {menu.map((menuItem) => {
-                return (
-                    <div
-                        key={menuItem.name}
-                        onClick={() => handleClickMenuItem(menuItem.name)}
-                    >
-                        {menuItem.name}
-                    </div>
-                )
-            })}
-            {children}
+            <div>
+                {props.children}
+            </div>
+            <div>
+                {menu.map((menuItem) => {
+                    return (
+                        <button
+                            key={menuItem}
+                            onClick={() => handleClickMenuItem(menuItem)}
+                        >
+                            {menuItem}
+                        </button>
+                    )
+                })}
+            </div>
         </div>
     )
 }
