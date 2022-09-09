@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomeView from "../views/Home";
 import LoginView from "../views/Login";
 import ProductsView from "../views/Products";
+import NavigationView from "../views/Navigation";
 
 function Router() {
   const auth = useSelector((state) => state.auth);
@@ -13,6 +14,7 @@ function Router() {
         {auth.logged ? (
           <>
             <Route path="/products" element={<ProductsView />} />
+            <Route path="/navigation" element={<NavigationView />} />
             <Route path="/" element={<HomeView />} />
           </>
         ) : (
