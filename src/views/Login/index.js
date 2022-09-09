@@ -9,7 +9,7 @@ function LoginView() {
     dispatch({
       type: "LOG_IN"
     });
-    navigate("/products");
+    navigate("/");
   };
 
   return (

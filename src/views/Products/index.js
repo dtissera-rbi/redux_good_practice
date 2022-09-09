@@ -1,50 +1,17 @@
-import { useDispatch, useSelector } from "react-redux";
+import { Provider, useSelector } from "react-redux";
+import store from './store'
+import ProductsList from './ProductsList'
 
 export default function ProductsView() {
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
+  const state = useSelector(state => state)
 
-  const handleAddProduct = () => {
-    const newProduct = createNewProduct();
-    dispatch({ type: "ADD_PRODUCT", payload: newProduct });
-  };
-
-  const createNewProduct = () => {
-    const random = Math.random();
-    const newProduct = {
-      id: random,
-      name: `NEW_PRODUCT_${random}`
-    };
-
-    return newProduct;
-  };
-
-  const handleDeleteProduct = (productId) => {
-    const newProductsList = products.productsList.filter(
-      (product) => product.id !== productId
-    );
-
-    dispatch({ type: "DELETE_PRODUCT", payload: newProductsList });
-  };
+  console.log('state from store.getState()', store.getState())
+  console.log('state from useSelector', state)
 
   return (
-    <div>
+    <Provider store={store}>
       <h1>Products View</h1>
-      <button onClick={handleAddProduct}>+ Add new product</button>
-      {products.productsList.map((product) => {
-        return (
-          <h5 key={product.id}>
-            <div>ID: {product.id}</div>
-            <div>Name: {product.name}</div>
-            <button
-              style={{ backgroundColor: "red" }}
-              onClick={() => handleDeleteProduct(product.id)}
-            >
-              Delete Product
-            </button>
-          </h5>
-        );
-      })}
-    </div>
+      <ProductsList />
+    </Provider>
   );
 }
